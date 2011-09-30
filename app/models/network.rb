@@ -1,7 +1,7 @@
 class Network < ActiveRecord::Base
   has_many :partition_platforms
 
-  validates_uniqueness_of :name
+  validates :name, :presence => true, :uniqueness => true
 
   def self.staging
     self.find_by_name("staging")

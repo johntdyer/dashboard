@@ -11,16 +11,12 @@
     </div>
   <% end %>
   <div class="actions"> 
-    
-  <p>
-    <%= f.label :ppid %><br />
-    <%= f.text_field :ppid %>
-  </p>
-  <p>
-    <%= f.label :description %><br />
-    <%= f.text_field :description %>
-  </p>
+    <%= semantic_form_for @partition_platform do |f| %>
+      <%= f.input :network, :label=>"Network: "%> 
+      <%= f.input :ppid, :label=>"PPID: " %>
 
-    <%= f.submit %>
+      <%= f.buttons %>
+    <% end %>
+ 
   </div>
 <% end %>

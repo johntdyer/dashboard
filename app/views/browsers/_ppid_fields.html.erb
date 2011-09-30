@@ -1,7 +1,7 @@
 <p>
   <% for partition in PartitionPlatform.find(:all) %>  
      <div>
-       <%= check_box_tag "partition_platforms[ppids][]", partition.id, @browser.partition_platforms.include?(partition) %>  
+       <%= check_box_tag "partition_platforms[]", partition.id, @browser.partition_platforms.include?(partition) %>  
        <%= "#{partition.description} (#{partition.ppid})" %>  
      </div>
    <% end %>

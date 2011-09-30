@@ -58,6 +58,11 @@ class BrowsersController < ApplicationController
   def update
     @browser = Browser.find(params[:id])
 
+     # for id in params[:partition_platforms]
+     #   Rails.logger.debug { "==> #{id}" }
+     #   @browser.partition_platforms << PartitionPlatform.find(id.to_i)
+     # end     
+
     respond_to do |format|
       if @browser.update_attributes(params[:browser])
         format.html { redirect_to @browser, notice: 'Browser was successfully updated.' }
