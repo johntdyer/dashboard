@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+  <table>
+    <tr>
+      <td> <%= @browser.hostname %></td>
+      <td> <%= @browser.partition_platforms.collect(&:ppid).join(",")%></td>
+      <td><%= link_to 'Edit', edit_browser_path(@browser) %> | <%= link_to 'Back', browsers_path %></td>
+    </tr>
+  </table>
+
