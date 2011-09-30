@@ -11,14 +11,12 @@
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.label :hostname %>
-    <%= f.text_field :hostname %>
-    
-    <%= f.fields_for :partition_platforms do |builder| %>
-        <%= render "ppid_fields", :f => builder %>
-      <% end %>
+    <%= semantic_form_for @browser do |f| %>
+      <%= f.inputs :hostname %> 
+      <%= f.input :partition_platforms, :as => :check_boxes %>
+      <%= f.input :datacenter %>
 
-    <%= f.submit %>
-  </div>
+      <%= f.buttons %>
+    <% end %>
+
 <% end %>

@@ -1,7 +1,7 @@
 class Datacenter < ActiveRecord::Base
   has_many :browsers
 
-  validates_uniqueness_of :name
+  validates :name, :presence => true, :uniqueness => true
 
   def self.orlando
     self.find_by_name("orlando")
