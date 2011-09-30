@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  ppid: 1
+  description: MyString
+  network_id: 1
+
+two:
+  ppid: 1
+  description: MyString
+  network_id: 1

@@ -1,0 +1,2 @@
+module PartitionPlatformsHelper
+end

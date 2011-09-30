@@ -1,0 +1,26 @@
+<%= form_for(@partition_platform) do |f| %>
+  <% if @partition_platform.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@partition_platform.errors.count, "error") %> prohibited this partition_platform from being saved:</h2>
+
+      <ul>
+      <% @partition_platform.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="actions"> 
+    
+  <p>
+    <%= f.label :ppid %><br />
+    <%= f.text_field :ppid %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </p>
+
+    <%= f.submit %>
+  </div>
+<% end %>

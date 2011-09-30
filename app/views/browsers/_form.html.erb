@@ -1,0 +1,24 @@
+<%= form_for(@browser) do |f| %>
+  <% if @browser.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@browser.errors.count, "error") %> prohibited this browser from being saved:</h2>
+
+      <ul>
+      <% @browser.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.label :hostname %>
+    <%= f.text_field :hostname %>
+    
+    <%= f.fields_for :partition_platforms do |builder| %>
+        <%= render "ppid_fields", :f => builder %>
+      <% end %>
+
+    <%= f.submit %>
+  </div>
+<% end %>
