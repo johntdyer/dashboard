@@ -9,9 +9,11 @@
 
 <% @partition_platforms.each do |partition_platform| %>
   <tr>
-    <td><%= link_to 'Show', partition_platform %></td>
+    <% if current_user.try(:admin?) %>
     <td><%= link_to 'Edit', edit_partition_platform_path(partition_platform) %></td>
     <td><%= link_to 'Destroy', partition_platform, confirm: 'Are you sure?', method: :delete %></td>
+    <% end %>
+    
   </tr>
 <% end %>
 </table>

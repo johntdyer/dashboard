@@ -10,13 +10,12 @@
       </ul>
     </div>
   <% end %>
-
-    <%= semantic_form_for @browser do |f| %>
-      <%= f.inputs :hostname %> 
-      <%= f.input :partition_platforms, :as => :check_boxes %>
-      <%= f.input :datacenter %>
-
-      <%= f.buttons %>
-    <% end %>
-
+     <div id="browser_form">
+       <%= semantic_form_for @browser do |f| %>  
+         <%= f.input :hostname, :required => true, :label => false %> 
+         <%= f.input :partition_platforms, :as => :check_boxes,:label => false %>
+         <%= f.input :datacenter,:required => true,:label => false %>
+         <%= f.buttons %>
+       <% end %>
+    </div>
 <% end %>

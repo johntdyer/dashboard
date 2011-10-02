@@ -19,6 +19,8 @@ end
 gem 'jquery-rails'
 gem 'awesome_print'
 gem 'formtastic'
+
+#gem "compass", ">= 0.11.5"
 # Use unicorn as the web server
 # gem 'unicorn'
 
@@ -27,6 +29,9 @@ gem 'formtastic'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+gem 'devise'
+
+#gem 'web-app-theme', '~> 0.8.0'
 
 group :test do
   # Pretty printed test output

@@ -1,6 +1,6 @@
-<h1>Editing browser</h1>
+<h1>Editing <%=@browser.hostname%></h1>
+  <%= stylesheet_link_tag "browsers.css", :cache => true %>
+  <%= render 'form' %>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @browser %> |
-<%= link_to 'Back', browsers_path %>
+  <%= link_to 'Show', @browser %> |
+  <%= link_to 'Back', browsers_path %>

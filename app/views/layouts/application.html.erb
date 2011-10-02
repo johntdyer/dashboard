@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head>            
   <title>Dashboard</title>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+  <%= javascript_include_tag :application, :cache => true %>  
+  <%= stylesheet_link_tag :application %>
+  
+  <%= csrf_meta_tag %>
 </head>
 <body>
-
-<%= yield %>
-
-</body>
+ <div id="header">
+   <% if user_signed_in? %>
+     <%= current_user.email %>. <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+   <% else %>
+      <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
+   <% end %>
+   </div>
+   <div class="flash">
+    <% flash.each do |type, message| -%>
+       <div class="message <%= type %>">
+         <p><%= message %></p>
+       </div>
+    <% end -%>
+   </div>
+   <div id="main">
+    <%= yield %>
+   </div>
+ </body>
 </html>
