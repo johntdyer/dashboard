@@ -3,7 +3,10 @@
     <tr>
       <td> <%= @browser.hostname %></td>
       <td> <%= @browser.partition_platforms.collect(&:ppid).join(",")%></td>
-      <td><%= link_to 'Edit', edit_browser_path(@browser) %> | <%= link_to 'Back', browsers_path %></td>
+      <td>
+          <%= link_to_if current_user.try(:admin?), 'Edit', edit_browser_path(@browser) %>
+          <%= link_to 'Back', browsers_path %>
+      </td> 
     </tr>
   </table>
 

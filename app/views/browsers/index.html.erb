@@ -1,22 +1,23 @@
 <h1>Listing browsers</h1>
 
-<table>
-  <tr>
-    <th>Hostname</th>
-    <th></th>
-    <th></th>
-  </tr>
+<div id="browsers">
+  <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
+      <THEAD>
+        <th>Hostname</th>
+        <th></th>
+      </THEAD>
 
-<% @browsers.each do |browser| %>
-  <tr>     
-    <td><%= browser.hostname %></td>
-    <td><%= link_to 'Show', browser %></td>
-    <td><%= link_to 'Edit', edit_browser_path(browser) %></td>
-    <td><%= link_to 'Destroy', browser, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Browser', new_browser_path %>
+      <% @browsers.each do |browser| %>
+      <tr>     
+        <td><%= shorten_hostname(browser.hostname) %></td>
+        <td><%= link_to raw("#{image_tag("icons/PNG-24/Info.png")}"), browser %>
+        <%= link_to_if current_user.try(:admin?), raw("#{image_tag("icons/PNG-24/Modify.png")}"), edit_browser_path(browser) %>
+        <%= link_to_if current_user.try(:admin?), raw("#{image_tag("icons/PNG-24/Delete.png")}"), browser, confirm: 'Are you sure?', method: :delete %></td>
+        
+      </tr>
+      <% end %>
+    </table>
+  <br />
+  </div>
+  <%= link_to_if current_user.try(:admin?), 'New Browser', new_browser_path %>
+  
