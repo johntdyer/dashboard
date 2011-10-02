@@ -1,0 +1,1 @@
+require 'labs_routing'

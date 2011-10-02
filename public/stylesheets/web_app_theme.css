@@ -1,0 +1,65 @@
+@charset "UTF-8";
+/* 
+ * This css will include all web-app-theme css you need
+ *
+ *= require web-app-theme/base
+ *= require web-app-theme/themes/default/style.css
+ *= require_self
+ */
+/* Write here your css for overriding the theme's rules */
+/* line 12, ../../app/assets/stylesheets/web_app_theme.scss */
+#browser_form input#browser_hostname {
+  font-size: 18px;
+  background: url(input-box-white387a.png) left center no-repeat;
+  height: 43px;
+  width: 451px;
+  border: 0px;
+  padding-top: 10px;
+  padding-bottom: 3px;
+  padding-left: 18px;
+  margin-right: 15px;
+  outline: none;
+}
+/* line 25, ../../app/assets/stylesheets/web_app_theme.scss */
+#browser_form input:hover {
+  background: url(input-box-white387b.png) transparent left center no-repeat;
+}
+/* line 29, ../../app/assets/stylesheets/web_app_theme.scss */
+#browser_form input:focus {
+  background: url(input-box-white387a.png) transparent left center no-repeat;
+}
+/* line 33, ../../app/assets/stylesheets/web_app_theme.scss */
+#browser_form ​
+li {
+  clear: none;
+  float: left;
+  padding: 10px;
+  padding-top: 10px;
+  font-size: 18px;
+  height: 10px;
+  margin-right: 40px;
+  border: 0px;
+}
+/* line 44, ../../app/assets/stylesheets/web_app_theme.scss */
+#browser_form ol, #browser_form li {
+  list-style-type: none;
+}
+/* line 48, ../../app/assets/stylesheets/web_app_theme.scss */
+#browser_form label {
+  font-size: 18px;
+}
+/* line 52, ../../app/assets/stylesheets/web_app_theme.scss */
+#browser_form .choices, #browser_form .buttons {
+  border: 0px;
+}
+/* line 56, ../../app/assets/stylesheets/web_app_theme.scss */
+#browser_form select {
+  background: transparent;
+  width: 268px;
+  padding: 5px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  height: 34px;
+  overflow: hidden;
+  background: url(new_arrow.png) no-repeat right #dddddd;
+}
