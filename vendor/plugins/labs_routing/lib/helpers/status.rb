@@ -60,18 +60,18 @@ module LabsRouting
          }
 
 
-         Gateway.all.each do |g|
-           threads << Thread.new(g) do |phono|
-             result={
-               phono.hostname=>{
-                 :inbound =>  LabsRouting::Phono.new({
-                                              :host=>phono.hostname,
-                                              :tsig_key=>$config.dns.phono.d.tsig_key
-                                            }).in?
-                 }
-             }.merge!(result)
-           end
-         end
+         # Gateway.all.each do |g|
+         #            threads << Thread.new(g) do |phono|
+         #              result={
+         #                phono.hostname=>{
+         #                  :inbound =>  LabsRouting::Phono.new({
+         #                                               :host=>phono.hostname,
+         #                                               :tsig_key=>$config.dns.phono.d.tsig_key
+         #                                             }).in?
+         #                  }
+         #              }.merge!(result)
+         #            end                  
+         #end
 
          threads.each { |aThread|  aThread.join }
          return result

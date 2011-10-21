@@ -1,4 +1,7 @@
 $LOAD_PATH.unshift(File.dirname(__FILE__))
+
+
+
 %w(
     cgi 
     yaml
@@ -24,11 +27,12 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
     zones/inbound
     zones/outbound
     zones/phono
-  ).each { |lib| require lib }
-
-%w(
-    models/browser
-    models/partition
-    models/gateway
     db/database
   ).each { |lib| require lib }
+
+# %w(
+#     models/browser
+#     models/partition
+#     models/gateway
+#     
+#   ).each { |lib| require lib }    

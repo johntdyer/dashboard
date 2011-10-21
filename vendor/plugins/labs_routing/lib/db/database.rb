@@ -3,7 +3,7 @@ module LabsRouting
   BASE_PATH = "#{Dir.home()}/.lab_routing"
   Dir.mkdir(BASE_PATH) unless Dir.exist?(BASE_PATH)
   ROUTING_DB = "#{BASE_PATH}/routing.db"
-
+  $config = LabsRouting::Config.new(File.open("#{LabsRouting::BASE_PATH}/config.yml") { |file| YAML.load(file) })
  #  DB = SQLite3::Database.new(ROUTING_DB)
  # 
  #   ActiveRecord::Base.establish_connection(:adapter => 'sqlite3', :database => ROUTING_DB, :pool => 20)

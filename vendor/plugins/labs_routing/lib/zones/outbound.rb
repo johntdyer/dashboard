@@ -56,7 +56,7 @@ module LabsRouting
     private
 
     def modify_host(args)
-      @browser.partitions.each.collect(&:ppid).each do |ppid|
+      @browser.partition_platforms.each.collect(&:ppid).each do |ppid|
         `printf "update #{args[:method]} #{ppid}.#{@zone_name}.  #{@ttl}  IN  NAPTR 0 0 \\"u\\" \\"server+E2U\\" \\"\x21\x5e\x2e\x2A\\x24\x21#{IPSocket.getaddress(@hostname)}\x21\\" .\nsend\nquit" | nsupdate -y #{@key_name}:#{@tsig_key}`
       end
     end

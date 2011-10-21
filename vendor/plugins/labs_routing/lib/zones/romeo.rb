@@ -7,9 +7,9 @@ module LabsRouting
       def initialize(args)
         IPSocket.getaddress(args[:browser]) unless args[:force]   # Test to ensure browser is resolvable
 
-        @browser  = find_browser(args[:browser])
+        @browser  = Browser.find_by_hostname(args[:browser])
         @hostname  = @browser.hostname
-        @datacenter = @browser.datacenter
+        @datacenter = @browser.datacenter.short_name
 
         if args[:tsig_key]
            @tsig_key = args[:tsig_key]
@@ -57,7 +57,7 @@ module LabsRouting
     private
 
       def modify_host(args)
-        @browser.partitions.each.collect(&:ppid).each do |ppid|
+        @browser.partition_platforms.each.collect(&:ppid).each do |ppid|
           `printf "update #{args[:method]} _sip._udp.ppid#{ppid}.#{@zone_name}. #{@ttl} IN SRV 0 5 #{@port} #{@hostname}.\nsend\nquit" | nsupdate -y #{@key_name}:#{@tsig_key}`
         end
       end

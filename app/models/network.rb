@@ -4,7 +4,10 @@ class Network < ActiveRecord::Base
   validates :name, :presence => true, :uniqueness => true
 
   def self.staging
-    self.find_by_name("staging")
+    self.find_by_name("development")
+  end
+  def self.development
+    self.find_by_name("development")
   end
 
   def self.production
