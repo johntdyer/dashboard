@@ -1,8 +1,37 @@
 <p id="notice"><%= notice %></p>
 
-<% if current_user.try(:admin?) %>
+<div id="hostname">
+  <label for="ppid">PPID:</label>
+  <%= @partition_platform.ppid %></td>
+</div>
+<div id="desc">
+  <label for="desc">Description:</label>
+  <%= @partition_platform.description %></td>
+</div>
+ 
+<div id="type">
+  <label for="desc">Type:</label>
+  <%= @partition_platform.network.name.capitalize %></td>
+</div>
 
-  <%= link_to 'Edit', edit_partition_platform_path(@partition_platform) %> | 
-  <%end%>
-  
-<%= link_to 'Back', partition_platforms_path %>
+<div id="browsers">
+<table border="0" cellspacing="0" cellpadding="2">
+  <thead>
+     <th>Hostname</th>
+     <th>Description</th>
+     <th>Data Center</th>
+   </thead> 
+  <% @partition_platform.browsers.each do |b| %>
+    <tr>
+      <td><%=b.hostname.capitalize%></td>
+      <td><%=b.description%></td>
+      <td><%=b.datacenter.name.capitalize%></td>
+    </tr>
+  <% end %>
+</table>
+</div>
+
+<% if current_user.try(:admin?) %>
+  <%= link_to "Edit", edit_partition_platform_path(@partition_platform) %>
+<%end%>
+  <%= link_to 'Back', partition_platforms_path %>

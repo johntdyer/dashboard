@@ -11,13 +11,16 @@
       <tr>     
         <td><%= shorten_hostname(browser.hostname) %></td>
         <td><%= link_to raw("#{image_tag("icons/PNG-24/Info.png")}"), browser %>
-        <%= link_to_if current_user.try(:admin?), raw("#{image_tag("icons/PNG-24/Modify.png")}"), edit_browser_path(browser) %>
-        <%= link_to_if current_user.try(:admin?), raw("#{image_tag("icons/PNG-24/Delete.png")}"), browser, confirm: 'Are you sure?', method: :delete %></td>
-        
+          <% if current_user.try(:admin?) %>
+            <%= link_to raw("#{image_tag("icons/PNG-24/Modify.png")}"), edit_browser_path(browser) %>
+            <%= link_to raw("#{image_tag("icons/PNG-24/Delete.png")}"), browser, confirm: 'Are you sure?', method: :delete %></td>
+          <%end%>
       </tr>
       <% end %>
     </table>
   <br />
-  </div>
-  <%= link_to_if current_user.try(:admin?), 'New Browser', new_browser_path %>
+  </div> 
+  <% if current_user.try(:admin?) %>
+    <%= link_to 'New Browser', new_browser_path %>
+  <%end%>
   

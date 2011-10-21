@@ -4,8 +4,11 @@
  *
  *= require datatables.css
  *= require demo_page.css
+ *= require uniform.default.css
  *= require_self
  */
+
+ @import 'mixins/_mixins.scss';  
 
 #main{
   margin-left:40px;  
@@ -73,4 +76,9 @@
   }
 
 }
-                 
+
+  .routingButton{
+   @include rounded(10px);
+   width: 36px;
+   height: 24px;
+ }

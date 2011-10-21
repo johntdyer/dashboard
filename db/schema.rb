@@ -11,11 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110930211256) do
+ActiveRecord::Schema.define(:version => 20111003005212) do
 
   create_table "browsers", :force => true do |t|
     t.string   "hostname"
     t.string   "description"
+    t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "datacenter_id"
@@ -66,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20110930211256) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "admin",                                 :default => false
+    t.boolean  "routing_admin",                         :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

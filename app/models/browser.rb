@@ -1,4 +1,7 @@
 class Browser < ActiveRecord::Base
+ extend FriendlyId
+ friendly_id :hostname , :use => :slugged
+  
   has_and_belongs_to_many :partition_platforms, :uniq=>true
   belongs_to :datacenter
 
