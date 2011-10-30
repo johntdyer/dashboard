@@ -30,6 +30,8 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
     db/database
   ).each { |lib| require lib }
 
+  $config = LabsRouting::Config.new(File.open("#{LabsRouting::BASE_PATH}/config.yml") { |file| YAML.load(file) })
+
 # %w(
 #     models/browser
 #     models/partition

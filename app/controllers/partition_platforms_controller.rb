@@ -1,4 +1,6 @@
 class PartitionPlatformsController < ApplicationController
+  before_filter :authenticate_user!, :except=>[:show,:index]
+  
   # GET /partition_platforms
   # GET /partition_platforms.json
   def index

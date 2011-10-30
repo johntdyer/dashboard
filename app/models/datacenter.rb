@@ -1,5 +1,7 @@
 class Datacenter < ActiveRecord::Base
   has_many :browsers
+  has_many :phonos
+  has_many :nodes
 
   validates :name, :presence => true, :uniqueness => true
 

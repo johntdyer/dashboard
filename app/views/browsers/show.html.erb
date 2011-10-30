@@ -5,16 +5,24 @@
   <%= @browser.hostname %></td>
 </div>
   <div id="ppid">
-  <label for="ppid">PPID:</label>
-  
-    <%= @browser.partition_platforms.collect(&:ppid).join(",")%></td>
+    <table border="0" cellspacing="5" cellpadding="5">
+      <thead>
+        <th>PPID</th>
+        <th>Description</th>
+        <th>Network</th> 
+        <th></th>
+      </thead>
+      <% @browser.partition_platforms.each do |e| %>
+      <tr>
+        <td><%= e.ppid %></td>
+        <td><%= e.description.capitalize %></td>
+        <td><%= e.network.name.capitalize %></td>
+      </tr>
+      <% end %>
+    </table>
   </div>
 
-    
     <%= render 'routing' %>
 
-
-    <% if current_user.try(:admin?) %>     
-      <%= link_to "Edit", edit_browser_path(@browser) %>
-    <%end%>
-      <%= link_to 'Back', browsers_path %>                       
+    <%= link_to "Edit", edit_browser_path(@browser) if current_user.try(:admin?)%>
+    <%= link_to 'Back', browsers_path %>                       
