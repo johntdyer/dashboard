@@ -32,6 +32,10 @@ Browser.create([
    {:hostname=>"groupme143.orl.voxeo.net",:description=>"Dedicated GroupMe box"}
   ])
 
+Node.create([
+  {:hostname=>"rayo-node111.orl.voxeo.net",:description=>"Rayo node server"},
+  {:hostname=>"rayo-node112.orl.voxeo.net",:description=>"Rayo node server"},
+])
 
 PartitionPlatform.create({
       :ppid=>410,
@@ -117,36 +121,35 @@ PartitionPlatform.create({
       :network=>Network.find_by_name("production")
 }).browsers << Browser.where("hostname like ?","tropo1%.%.voxeo.net")
 
-# PartitionPlatform.create({
-#       :ppid=>659,
-#       :description=>'ORL - Rayo',
-#       :network=>Network.find_by_name("development")
-# }).browsers << Browser.where("hostname like ?","groupme1%.orl.voxeo.net")
-# 
-# PartitionPlatform.create({
-#       :ppid=>660,
-#       :description=>'ORL - Rayo',
-#       :network=>Network.find_by_name("production")
-# }).browsers << Browser.where("hostname like ?","groupme1%.orl.voxeo.net")
-# 
-# PartitionPlatform.create({
-#       :ppid=>661,
-#       :description=>'ORL - Rayo (messaging)',
-#       :network=>Network.find_by_name("development")
-# }).browsers << Browser.where("hostname like ?","groupme1%.orl.voxeo.net")
-# 
-# PartitionPlatform.create({
-#       :ppid=>662,
-#       :description=>'ORL - Rayo (messaging)',
-#       :network=>Network.find_by_name("production")
-# }).browsers << Browser.where("hostname like ?","rayo-node%.orl.voxeo.net")    
+PartitionPlatform.create({
+      :ppid=>659,
+      :description=>'ORL - Rayo',
+      :network=>Network.find_by_name("development")
+}).nodes << Node.where("hostname like ?","rayo-node%.orl.voxeo.net")
+
+PartitionPlatform.create({
+      :ppid=>661,
+      :description=>'ORL - Rayo (messaging)',
+      :network=>Network.find_by_name("development")
+}).nodes << Node.where("hostname like ?","rayo-node%.orl.voxeo.net")
+
+Phono.create([
+   {:hostname=>"phonogw121.orl.voxeo.net",:description=>"Phono Gateway"},
+   {:hostname=>"phonogw122.orl.voxeo.net",:description=>"Phono Gateway"},
+   {:hostname=>"phonogw121.atl.voxeo.net",:description=>"Phono Gateway"},
+   {:hostname=>"phonogw122.atl.voxeo.net",:description=>"Phono Gateway"},
+   {:hostname=>"phonogw121.las.voxeo.net",:description=>"Phono Gateway"},
+   {:hostname=>"phonogw122.las.voxeo.net",:description=>"Phono Gateway"}
+  ])
 
 
-
-
-
-#Datacenter.find(1).browsers.create(:hostname => "tester185.orl.voxeo.net")
 Datacenter.find_by_name("orlando").browsers << Browser.where("hostname like ?","tropo%.orl.voxeo.net")
 Datacenter.find_by_name("orlando").browsers << Browser.where("hostname like ?","group%.orl.voxeo.net")
 Datacenter.find_by_name("atlanta").browsers << Browser.where("hostname like ?","tropo%.atl.voxeo.net")
 Datacenter.find_by_name("vegas").browsers << Browser.where("hostname like ?","tropo%.las.voxeo.net")
+
+Datacenter.find_by_name("orlando").phonos << Phono.where('hostname like ?', "phono%.orl.voxeo.net")
+Datacenter.find_by_name("atlanta").phonos << Phono.where('hostname like ?', "phono%.atl.voxeo.net")
+Datacenter.find_by_name("vegas").phonos << Phono.where('hostname like ?', "phono%.las.voxeo.net")
+
+Datacenter.find_by_name("orlando").nodes << Node.where('hostname like ?', "rayo-node%.orl.voxeo.net")

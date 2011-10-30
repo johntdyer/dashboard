@@ -1,23 +1,29 @@
 Dashboard::Application.routes.draw do
 
+  resources :nodes
+
   resources :phonos
 
-     devise_for :users
+  devise_for :users
 
-     resources :browsers
-     resources :partition_platforms
+  resources :browsers
+  resources :partition_platforms
 
-     match "/browsers/:browser", :constraints => {:browser => /[^\/]+/}, :to => "browsers#show"
+  match "/browsers/:browser", :constraints => {:browser => /[^\/]+/}, :to => "browsers#show"
 
-     match 'routing/:zone/:id', :constraints => {:id => /[^\/]+/}, :to => "route#update",  :via => [:put]
-     match 'routing/:zone/:id', :constraints => {:id => /[^\/]+/}, :to => "route#destroy",  :via => [:delete]
-     match 'routing/:zone/:id', :constraints => {:id => /[^\/]+/}, :to => "route#index",  :via => [:get]
-#     match 'routing', :to => "route#update",  :via => [:put, :delete, :get]
-     match 'ppid/:id' => 'partition_platforms#show', :as => :partition_platforms
-     match 'ppids' => 'partition_platforms#index', :as => :partition_platforms
+  match 'routing/:zone/:id', :constraints => {:id => /[^\/]+/}, :to => "route#update",  :via => [:post]
+  match 'routing/:zone/:id', :constraints => {:id => /[^\/]+/}, :to => "route#destroy",  :via => [:delete]
+  match 'routing/:zone/:id', :constraints => {:id => /[^\/]+/}, :to => "route#show",  :via => [:get]
+  match 'routing/:id', :constraints => {:id => /[^\/]+/}, :to => "route#show",  :via => [:get]
 
-     root :to => "home#index"
+  match 'ppid/:id' => 'partition_platforms#show', :as => :partition_platforms
 
-     match "/status/:browser", :constraints => {:browser => /[^\/]+/}, :to => "browsers#show"
+  match 'ppids' => 'partition_platforms#index', :as => :partition_platforms
+
+  match 'phono' => 'phonos#index', :as => :phonos
+
+  root :to => "home#index"
+
+  match "/status/:browser", :constraints => {:browser => /[^\/]+/}, :to => "browsers#show"
 
 end

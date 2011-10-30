@@ -1,6 +1,6 @@
 class BrowsersController < ApplicationController
   before_filter :authenticate_user!, :except=>[:show,:index]
-  
+
   # GET /browsers
   # GET /browsers.json
   def index
@@ -21,7 +21,7 @@ class BrowsersController < ApplicationController
       @browser = Browser.find(params[:id])
     end
 
-
+      @is_admin = current_user.try(:admin?)
       @outbound = LabsRouting::Outbound.new({:browser=>@browser.hostname,:tsig_key=>$config.dns.outbound.tsig_key})
       @romeo  = LabsRouting::Romeo.new({:browser=>@browser.hostname,:tsig_key=>$config.dns.romeo.send(@browser.datacenter.short_name).tsig_key})
 
@@ -29,7 +29,7 @@ class BrowsersController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @browser }
-    end   
+    end
   end
 
   # GET /browsers/new
@@ -96,6 +96,4 @@ class BrowsersController < ApplicationController
       format.json { head :ok }
     end
   end
-  
-  
 end

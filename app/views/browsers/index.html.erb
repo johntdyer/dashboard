@@ -9,7 +9,7 @@
 
       <% @browsers.each do |browser| %>
       <tr>     
-        <td><%= shorten_hostname(browser.hostname) %></td>
+        <td><%= link_to shorten_hostname(browser.hostname), "/browsers/#{browser.hostname}" %> </td>
         <td><%= link_to raw("#{image_tag("icons/PNG-24/Info.png")}"), browser %>
           <% if current_user.try(:admin?) %>
             <%= link_to raw("#{image_tag("icons/PNG-24/Modify.png")}"), edit_browser_path(browser) %>

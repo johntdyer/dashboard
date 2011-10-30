@@ -10,75 +10,141 @@
 
  @import 'mixins/_mixins.scss';  
 
-#main{
-  margin-left:40px;  
-}
-#browser_form{
-  
-  input#browser_hostname {
-    font-size:18px;
-    background: url(input-box-white387a.png) left center no-repeat;
-    height:43px;
-    width:451px;
-    border:0px;
-    padding-top:10px;
-    padding-bottom:3px;
-    padding-left:18px;
-    margin-right:15px;
-    outline: none;
-  }
+ #main{
+   margin-left:40px;  
+ }
+ #browser_form{
+   input#browser_hostname {
+     font-size:18px;
+     background: url(input-box-white387a.png) left center no-repeat;
+     height:43px;
+     width:451px;
+     border:0px;
+     padding-top:10px;
+     padding-bottom:3px;
+     padding-left:18px;
+     margin-right:15px;
+     outline: none;
+   }
 
-  input:hover{
-  background: url(input-box-white387b.png) transparent left center no-repeat;
-  }
+   input:hover{
+     background: url(input-box-white387b.png) transparent left center no-repeat;
+   }
 
-  input:focus{
-  background: url(input-box-white387a.png) transparent left center no-repeat;
-  }​
+   input:focus{
+     background: url(input-box-white387a.png) transparent left center no-repeat;
+   }​
 
-  li{
-    clear: none;
-    float: left;
-    padding: 10px; 
-    padding-top:10px;
-    font-size:18px;
+   li{
+     clear: none;
+     float: left;
+     padding: 10px; 
+     padding-top:10px;
+     font-size:18px;
+     
+     height: 10px;
+     margin-right: 40px;
+     border: 0px; 
+     list-style-type:none;
+   }
+
+   label{
+     font-size:18px;
+   }   
+
+   .choices,.buttons{
+     border: 0px;
+   } 
+   
+   ol,li{
+     list-style-type:none;
+   }
+
+   #browser_datacenter_input{
+     width: 240px;
+     height: 34px;
+     overflow: hidden;
+     background: url(down_arrow_select.jpg) no-repeat right #ddd;
     
-    height: 10px;
-    margin-right: 40px;
-    border: 0px; 
-    list-style-type:none;
-  }
-
-  label{
-    font-size:18px;
-  }   
-  .choices,.buttons{
-    border: 0px;
-  } 
-  ol,li{
-    list-style-type:none;
-  }
-  #browser_datacenter_input{
-
-    width: 240px;
-    height: 34px;
-    overflow: hidden;
-    background: url(down_arrow_select.jpg) no-repeat right #ddd;
-    
-    select {
+     select {
        background: transparent;
        width: 268px;
        padding: 5px;
        font-size: 16px;
        border: 1px solid #ccc;
        height: 34px;
-    }
-  }
+     }
+   }
 
-}
+ }
 
   .routingButton{
-   @include rounded(10px);
-   width: 36px;
-   height: 24px;
- }
+    @include rounded(10px);
+    width: 36px;
+    height: 24px;
+  }
+  
+  body {
+    font-family: Arial, Sans-serif;
+    padding: 0 20px;
+  }
+  .field {
+    width: 100%;
+    float: left;
+    margin: 0 0 20px;
+  }
+  .field input {
+    margin: 0 0 0 20px;
+  }
+  h3 span {
+    background: #444;
+    color: #fff;
+    padding: 3px;
+  }
+  pre {
+    background: #f4f4f4;
+  }
+
+/* Used for the Switch effect: */
+.cb-enable, .cb-disable, .cb-enable span, .cb-disable span {
+  background: url(../assets/switches/switch.gif) repeat-x;
+  display: block;
+  float: left;
+}
+.cb-enable span, .cb-disable span {
+  line-height: 30px;
+  display: block;
+  background-repeat: no-repeat;
+  font-weight: bold;
+}
+.cb-enable span {
+  background-position: left -90px;
+  padding: 0 10px;
+}
+.cb-disable span {
+  background-position: right -180px;
+  padding: 0 10px;
+}
+.cb-disable.selected {
+  background-position: 0 -30px;
+}
+.cb-disable.selected span {
+  background-position: right -210px;
+  color: #fff;
+}
+.cb-enable.selected {
+  background-position: 0 -60px;
+}
+.cb-enable.selected span {
+  background-position: left -150px;
+  color: #fff;
+}
+.switch label {
+  cursor: pointer;
+}
+
+input[type="radio"] {
+  visibility: hidden;
+  display: none;
+}
+      

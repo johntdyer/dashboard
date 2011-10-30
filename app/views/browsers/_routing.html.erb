@@ -1,4 +1,31 @@
-<table border="0" cellspacing="5" cellpadding="5">
+<% b = button_helper(@romeo) %>    
+<script type="text/javascript" charset="utf-8">
+  jQuery(document).ready(function() { 
+  
+    if(Boolean(<%= @romeo.in? %>)){
+      $('#active_romeo').attr('checked','checked');
+      $("label[for='inactive_romeo']").removeClass("selected");
+      $("label[for='active_romeo']").addClass("selected");
+    }else{
+      $('#inactive_romeo').attr('checked','checked');
+      $("label[for='active_romeo']").removeClass("selected");
+      $("label[for='inactive_romeo']").addClass("selected");
+    }
+    
+    if(Boolean(<%= @outbound.in? %>)){
+      $('#active_outbound').attr('checked','checked');
+      $("label[for='active_outbound']").addClass("selected");
+      $("label[for='inactive_outbound']").removeClass("selected");
+      
+    }else{
+      $('#inactive_outbound').attr('checked','checked');
+      $("label[for='active_outbound']").removeClass("selected");
+      $("label[for='inactive_outbound']").addClass("selected");
+    }
+  });
+</script>
+
+<table id="routing" border="0" cellspacing="5" cellpadding="5">
   <tr>
     <th>Zone</th>
     <th>Status</th>
@@ -6,13 +33,23 @@
   <tr>
     <td>Romeo</td>
       <td>
-        <div id="romeo_routing_div" class="routingButton" data_browser_hostname=<%=@browser.hostname%> data_in_routing=<%=@romeo.in?%>></div>
+        <p class="field switch" id="romeo_switch" data_type="romeo" data_active="<%=@romeo.in?%>" data_hostname=<%=@browser.hostname%>>
+          <input type="radio" id="active_romeo" name="field" />
+          <input type="radio" id="inactive_romeo" name="field"/>
+          <label for="active_romeo" class="cb-enable"><span>Active</span></label>
+          <label for="inactive_romeo" class="cb-disable"><span>Inactive</span></label>
+        </p>
       <td>
    </tr>
    <tr>
      <td>Outbound</td>
       <td>
-        <div id="outbound_routing_div" class="routingButton" data_browser_hostname=<%=@browser.hostname%> data_in_routing=<%=@outbound.in?%>></div>
+        <p class="field switch" id="outbound_switch" data_type="outbound" data_active="<%=@outbound.in?%>" data_hostname=<%=@browser.hostname%>>
+          <input type="radio" id="active_outbound" name="field" />
+          <input type="radio" id="inactive_outbound" name="field"/>
+          <label for="active_outbound" class="cb-enable"><span>Active</span></label>
+          <label for="inactive_outbound" class="cb-disable"><span>Inactive</span></label>
+        </p>
       </td>
     </tr>
 </table>
