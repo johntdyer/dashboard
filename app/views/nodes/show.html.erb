@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Hostname:</b>
+  <%= @node.hostname %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @node.description %>
+</p>
+
+<p>
+  <b>Slug:</b>
+  <%= @node.slug %>
+</p>
+
+<p>
+  <b>Datacenter:</b>
+  <%= @node.datacenter_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_node_path(@node) %> |
+<%= link_to 'Back', nodes_path %>

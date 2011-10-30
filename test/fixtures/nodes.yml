@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  hostname: MyString
+  description: MyString
+  slug: MyString
+  datacenter_id: 1
+
+two:
+  hostname: MyString
+  description: MyString
+  slug: MyString
+  datacenter_id: 1
