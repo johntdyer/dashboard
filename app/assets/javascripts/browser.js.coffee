@@ -32,18 +32,17 @@ $(document).ready ->
    updateRoute = (route_type,route_target,route_action) ->
      $.ajax {
        type: route_action
-       url: '/routing/' + route_type + '/' + route_target
+       url: '/routing/' + route_type
        dataType: "json"
        success: (xhr, textStatus, errorThrown) ->
-         console.log xhr
-         console.log textStatus
+         #console.log xhr
+         #console.log textStatus
        complete: (xhr, textStatus, errorThrown) ->
-         console.log xhr
-         console.log textStatus
+         console.log textStatus + ' => ' + xhr.responseText
        error: (xhr, textStatus, errorThrown) ->
          console.warn textStatus
          console.warn xhr
-       data: route_type: route_type, route_target: route_target, route_action: route_action
+       data: host: route_target #, route_target: route_target, route_action: route_action
      }
 
   

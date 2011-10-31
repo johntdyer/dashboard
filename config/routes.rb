@@ -11,9 +11,13 @@ Dashboard::Application.routes.draw do
 
   match "/browsers/:browser", :constraints => {:browser => /[^\/]+/}, :to => "browsers#show"
 
-  match 'routing/:zone/:id', :constraints => {:id => /[^\/]+/}, :to => "route#update",  :via => [:post]
-  match 'routing/:zone/:id', :constraints => {:id => /[^\/]+/}, :to => "route#destroy",  :via => [:delete]
-  match 'routing/:zone/:id', :constraints => {:id => /[^\/]+/}, :to => "route#show",  :via => [:get]
+  #match 'routing/:zone/:id', :constraints => {:id => /[^\/]+/}, :to => "route#update",  :via => [:put]
+  #match 'routing/:zone/:id', :constraints => {:id => /[^\/]+/}, :to => "route#destroy",  :via => [:delete]
+  #match 'routing/:zone/:id', :constraints => {:id => /[^\/]+/}, :to => "route#show",  :via => [:get]  
+
+
+  match 'routing/:zone', :to => "route#destroy",  :via => [:delete]
+  match 'routing/:zone/', :to => "route#update",  :via => [:put]
   match 'routing/:id', :constraints => {:id => /[^\/]+/}, :to => "route#show",  :via => [:get]
 
   match 'ppid/:id' => 'partition_platforms#show', :as => :partition_platforms
