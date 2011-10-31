@@ -1,17 +1,23 @@
 class RouteController < ApplicationController
-  before_filter :authenticate_user!, :except=>[:index]
+before_filter :authenticate_user!, :except=>[:index,:show]
 
   def update
-    @browser = Browser.find_by_hostname(params[:id])
+    if params[:hostname]
+      @browser = Browser.find_by_hostname(params[:hostname])
+    elsif params[:host]
+      @browser = Browser.find_by_hostname(params[:host])
+    elsif params[:browser]
+      @browser = Browser.find_by_hostname(params[:browser])
+    end
 
     case params[:zone].split("_")[0]
       when 'romeo'
-        Rails.logger.debug "#{params[:id]} added to romeo"
+        Rails.logger.debug "#{@browser.hostname} added to romeo"
         LabsRouting::Romeo.new({:browser=>@browser.hostname,:tsig_key=>$config.dns.romeo.send(@browser.datacenter.short_name).tsig_key}).add
         render :json => {:browser=>@browser.hostname,:zone=>"inbound",:action=>"add"}
       when 'outbound'
         LabsRouting::Outbound.new({:browser=>@browser.hostname,:tsig_key=>$config.dns.outbound.tsig_key}).add
-        Rails.logger.debug "#{params[:id]} added to outbound"
+        Rails.logger.debug "#{@browser.hostname} added to outbound"
         render :json => {:browser=>@browser.hostname,:zone=>"outbound",:action=>"add"}
       else
         render :json => "error"
@@ -19,16 +25,23 @@ class RouteController < ApplicationController
   end
 
   def destroy
-    @browser = Browser.find_by_hostname(params[:id])
+
+    if params[:hostname]
+      @browser = Browser.find_by_hostname(params[:hostname])
+    elsif params[:host]
+      @browser = Browser.find_by_hostname(params[:host])
+    elsif params[:browser]
+      @browser = Browser.find_by_hostname(params[:browser])
+    end
 
     case params[:zone]
       when 'romeo'
-        Rails.logger.debug "#{params[:id]} removed from romeo"
+        Rails.logger.debug "#{@browser.hostname} removed from romeo"
         LabsRouting::Romeo.new({:browser=>@browser.hostname,:tsig_key=>$config.dns.romeo.send(@browser.datacenter.short_name).tsig_key}).remove
         render :json => {:browser=>@browser.hostname,:zone=>"inbound",:action=>"remove"}
       when 'outbound'
         LabsRouting::Outbound.new({:browser=>@browser.hostname,:tsig_key=>$config.dns.outbound.tsig_key}).remove
-        Rails.logger.debug "#{params[:id]} removed from outbound"
+        Rails.logger.debug "#{@browser.hostname} removed from outbound"
         render :json => {:browser=>@browser.hostname,:zone=>"outbound",:action=>"remove"}
       else
         render :json =>"error"
