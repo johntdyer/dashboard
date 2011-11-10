@@ -22,5 +22,12 @@ module BrowsersHelper
     end
     return button
   end
-
+  
+  def get_status(browser)
+    {:routing=>{
+      :outbound=>LabsRouting::Outbound.new({:browser=>browser.hostname,:tsig_key=>$config.dns.outbound.tsig_key}).in?,
+      :inbound=>LabsRouting::Romeo.new({:browser=>browser.hostname,:tsig_key=>$config.dns.romeo.send(browser.datacenter.short_name).tsig_key}).in?
+    }
+  }
+  end
 end

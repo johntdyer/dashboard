@@ -1,6 +1,6 @@
 class PhonosController < ApplicationController
   before_filter :authenticate_user!, :except=>[:show,:index]
-  
+
   # GET /phonos
   # GET /phonos.json
   def index
@@ -76,6 +76,7 @@ class PhonosController < ApplicationController
   def destroy
     @phono = Phono.find(params[:id])
     @phono.destroy
+
 
     respond_to do |format|
       format.html { redirect_to phonos_url }

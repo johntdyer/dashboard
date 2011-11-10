@@ -2,13 +2,12 @@ class Node < ActiveRecord::Base
   extend FriendlyId
   friendly_id :hostname , :use => :slugged
 
-   has_and_belongs_to_many :partition_platforms, :uniq=>true
-   belongs_to :datacenter
+  has_and_belongs_to_many :partition_platforms, :uniq=>true
+  belongs_to :datacenter
 
-   validates :hostname, :presence => true, :uniqueness => true
+  validates :hostname, :presence => true, :uniqueness => true
 
+  accepts_nested_attributes_for :partition_platforms
+  accepts_nested_attributes_for :datacenter
 
-   accepts_nested_attributes_for :partition_platforms
-   accepts_nested_attributes_for :datacenter
-  
 end
