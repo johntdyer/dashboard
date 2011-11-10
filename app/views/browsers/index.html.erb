@@ -4,13 +4,19 @@
   <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
       <THEAD>
         <th>Hostname</th>
+        <th>Romeo</th>
+        <th>Outbound</th>
         <th></th>
       </THEAD>
 
       <% @browsers.each do |browser| %>
-      <tr>     
+      
+      <tr>
         <td><%= link_to shorten_hostname(browser.hostname), "/browsers/#{browser.hostname}" %> </td>
-        <td><%= link_to raw("#{image_tag("icons/PNG-24/Info.png")}"), browser %>
+            <td><%=browser.in_romeo?%></td>
+            <td><%=browser.in_outbound?%></td>
+        <td><%= link_to raw("#{image_tag("icons/PNG-24/Info.png")}"), browser %> 
+    
           <% if current_user.try(:admin?) %>
             <%= link_to raw("#{image_tag("icons/PNG-24/Modify.png")}"), edit_browser_path(browser) %>
             <%= link_to raw("#{image_tag("icons/PNG-24/Delete.png")}"), browser, confirm: 'Are you sure?', method: :delete %></td>
@@ -19,7 +25,7 @@
       <% end %>
     </table>
   <br />
-  </div> 
+  </div>
   <% if current_user.try(:admin?) %>
     <%= link_to 'New Browser', new_browser_path %>
   <%end%>

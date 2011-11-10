@@ -18,16 +18,16 @@ module LabsRouting
       @port        = args[:port]       || 5222
       @ttl         = args[:ttl]        || 60
 
-      rescue Exception => e
-        puts e
-        puts e.backtrace.join("\n")
+    rescue Exception => e
+      puts e
+      puts e.backtrace.join("\n")
     end
 
     def method_missing(method_sym, *args, &block)
-      if method_sym.to_s =~ /^(remove|delete|add)_(.+)/ 
-        if Regexp.last_match[1].start_with?('remove','delete') 
+      if method_sym.to_s =~ /^(remove|delete|add)_(.+)/
+        if Regexp.last_match[1].start_with?('remove','delete')
           modify_site(:site=>dc_short_name("#{Regexp.last_match[2]}"),:method=>'delete')
-        elsif Regexp.last_match[1].start_with?('add') 
+        elsif Regexp.last_match[1].start_with?('add')
           modify_site(:site=>dc_short_name("#{Regexp.last_match[2]}"),:method=>'add')
         end
       else
@@ -63,27 +63,28 @@ module LabsRouting
 
     private
 
-      ## Add or remove a host from routing
-      def modify_host(args)
-        if args[:host]
-          Kernel.system "printf \"update #{args[:method]} _xmpp-client._tcp.gw.#{find_datacenter(args[:host])}-internal.d.phono.com. #{@ttl} IN SRV 10 0 #{@port} #{args[:host]}.\nsend\nquit\" | nsupdate -y #{@key_name}:#{@tsig_key}"
-        else
-          raise "Browser required"
-        end
+    ## Add or remove a host from routing
+    def modify_host(args)
+      if args[:host]
+        Kernel.system "printf \"update #{args[:method]} _xmpp-client._tcp.gw.#{find_datacenter(args[:host])}-internal.d.phono.com. #{@ttl} IN SRV 10 0 #{@port} #{args[:host]}.\nsend\nquit\" | nsupdate -y #{@key_name}:#{@tsig_key}"
+      else
+        raise "Browser required"
       end
+    end
 
-      ## Add or remove a datacenter from routing
-      def modify_site(args)
-        if args[:site] && args[:site] != 'orl'
-          `printf "update #{args[:method]} lb.d.phono.com.  #{@ttl} A #{lb_address(args[:site])}\nsend\nquit" | nsupdate -y #{@key_name}:#{@tsig_key}`
-        else
-          raise "Site Required"
-        end
+    ## Add or remove a datacenter from routing
+    def modify_site(args)
+      if args[:site] && args[:site] != 'orl'
+        `printf "update #{args[:method]} lb.d.phono.com.  #{@ttl} A #{lb_address(args[:site])}\nsend\nquit" | nsupdate -y #{@key_name}:#{@tsig_key}`
+      else
+        raise "Site Required"
       end
+    end
 
-      def check
-        `dig @#{@nameserver} axfr #{@zone_name} | grep SRV | grep '#{@hostname}'`.empty?
-      end
+    def check
+      `dig @#{@nameserver} axfr #{@zone_name} | grep SRV | grep '#{@hostname}'`.empty?
+    end
+
 
   end
 end
