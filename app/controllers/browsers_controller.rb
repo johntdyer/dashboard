@@ -1,5 +1,4 @@
 class BrowsersController < ApplicationController
-  before_filter :authenticate_user!, :except=>[:show,:index]
 
   # GET /browsers
   # GET /browsers.json
@@ -21,9 +20,9 @@ class BrowsersController < ApplicationController
       @browser = Browser.find(params[:id])
     end
 
-      @is_admin = current_user.try(:admin?)
-      @outbound = LabsRouting::Outbound.new({:browser=>@browser.hostname,:tsig_key=>$config.dns.outbound.tsig_key})
-      @romeo  = LabsRouting::Romeo.new({:browser=>@browser.hostname,:tsig_key=>$config.dns.romeo.send(@browser.datacenter.short_name).tsig_key})
+    #@is_admin = current_user.try(:admin?)
+    @outbound = LabsRouting::Outbound.new({:browser=>@browser.hostname,:tsig_key=>$config.dns.outbound.tsig_key})
+    @romeo  = LabsRouting::Romeo.new({:browser=>@browser.hostname,:tsig_key=>$config.dns.romeo.send(@browser.datacenter.short_name).tsig_key})
 
 
     respond_to do |format|
@@ -68,11 +67,6 @@ class BrowsersController < ApplicationController
   # PUT /browsers/1.json
   def update
     @browser = Browser.find(params[:id])
-
-     # for id in params[:partition_platforms]
-     #   Rails.logger.debug { "==> #{id}" }
-     #   @browser.partition_platforms << PartitionPlatform.find(id.to_i)
-     # end     
 
     respond_to do |format|
       if @browser.update_attributes(params[:browser])

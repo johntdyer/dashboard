@@ -1,5 +1,5 @@
 class PhonosController < ApplicationController
-  before_filter :authenticate_user!, :except=>[:show,:index]
+  #before_filter :authenticate_user!, :except=>[:show,:index]
 
   # GET /phonos
   # GET /phonos.json

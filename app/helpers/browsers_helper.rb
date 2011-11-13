@@ -4,30 +4,13 @@ module BrowsersHelper
     "#{h[0]}.#{h[1]}"
   end
 
-
-  def button_helper(zone)
-    require 'ostruct'
-    button = OpenStruct.new
-    if zone.in?
-      button.in_css    = "cb-enable selected"
-      button.out_css    = "cb-disable"
-      button.active = "checked"
-      button.inactive = ""
-      button.status = "checked"
+  def get_button(status)
+    html=""
+    if status
+      html+='<img src="assets/thumbs-up.png" height="32px" width="32px" alt="out" />'
     else
-      button.in_css    = "cb-disable"
-      button.out_css    = "cb-enable selected"
-      button.active = ""
-      button.inactive = ""
+      html+='<img src="assets/thumbs-down.png" height="32px" width="32px" alt="out" />'
     end
-    return button
-  end
-  
-  def get_status(browser)
-    {:routing=>{
-      :outbound=>LabsRouting::Outbound.new({:browser=>browser.hostname,:tsig_key=>$config.dns.outbound.tsig_key}).in?,
-      :inbound=>LabsRouting::Romeo.new({:browser=>browser.hostname,:tsig_key=>$config.dns.romeo.send(browser.datacenter.short_name).tsig_key}).in?
-    }
-  }
+    html.html_safe
   end
 end

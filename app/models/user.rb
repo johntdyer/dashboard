@@ -1,19 +1,26 @@
-class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :confirmable, :recoverable, :rememberable, :trackable, :validatable
+class User
+  require 'httparty'
+  attr_reader :roles,:user_data
 
+  include HTTParty
 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :login
+  def initialize(u,p)
+    @user_data = User.get("#{ENV['PROV_API_BASE_URI']}/user",:basic_auth => {:username => u, :password => p}).parsed_response
 
-  attr_accessor :login
-
-  protected
-
-  def self.find_for_database_authentication(warden_conditions)
-    conditions = warden_conditions.dup
-    login = conditions.delete(:login)
-    where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+    if @user_data
+      @user_data.merge!(:roles=>get_roles)
+    end
   end
+
+  def is_admin
+    self.roles.include?('PLATFORM_OPS')
+  end
+
+  private
+
+  def get_roles
+    auth = {:username => ENV['PROV_API_UNAME'], :password => ENV['PROV_API_PASSWD']}
+    User.get("#{ENV['PROV_API_BASE_URI']}/users/#{@user_data['username']}/roles",:basic_auth => auth).parsed_response.collect{|x| x["roleName"]}
+  end
+
 end

@@ -1,29 +1,33 @@
 <h1>Listing nodes</h1>
 
 <table>
-  <tr>
-    <th>Hostname</th>
-    <th>Description</th>
-    <th>Slug</th>
-    <th>Datacenter</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<tr>
+<th>Hostname</th>
+<th>Description</th>
+<th>Datacenter</th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
 
 <% @nodes.each do |node| %>
   <tr>
-    <td><%= node.hostname %></td>
-    <td><%= node.description %></td>
-    <td><%= node.slug %></td>
-    <td><%= node.datacenter_id %></td>
-    <td><%= link_to 'Show', node %></td>
-    <td><%= link_to 'Edit', edit_node_path(node) %></td>
-    <td><%= link_to 'Destroy', node, confirm: 'Are you sure?', method: :delete %></td>
+  <td><%= node.hostname.capitalize %></td>
+  <td><%= node.description.capitalize %></td>
+  <td><%= node.datacenter.name.capitalize %></td>
+
+
+  <td><%= link_to 'Show', node %></td>
+  <% if super_admin? %>
+  <td><%= link_to 'Edit', edit_node_path(node) %></td>
+  <td><%= link_to 'Destroy', node, confirm: 'Are you sure?', method: :delete %></td>
+  <%end%>
   </tr>
-<% end %>
-</table>
+  <% end %>
+  </table>
 
-<br />
+  <br />
+  <% if super_admin? %>
 
-<%= link_to 'New Node', new_node_path %>
+  <%= link_to 'New Node', new_node_path %>
+  <%end%>

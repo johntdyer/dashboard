@@ -4,8 +4,6 @@ Dashboard::Application.routes.draw do
 
   resources :phonos
 
-  devise_for :users
-
   resources :browsers
   resources :partition_platforms
 
@@ -13,10 +11,10 @@ Dashboard::Application.routes.draw do
 
   #match 'routing/:zone/:id', :constraints => {:id => /[^\/]+/}, :to => "route#update",  :via => [:put]
   #match 'routing/:zone/:id', :constraints => {:id => /[^\/]+/}, :to => "route#destroy",  :via => [:delete]
-  #match 'routing/:zone/:id', :constraints => {:id => /[^\/]+/}, :to => "route#show",  :via => [:get]  
+  #match 'routing/:zone/:id', :constraints => {:id => /[^\/]+/}, :to => "route#show",  :via => [:get]
 
 
-  match 'routing/:zone', :to => "route#destroy",  :via => [:delete]
+  match 'routing/:zone/', :to => "route#destroy",  :via => [:delete]
   match 'routing/:zone/', :to => "route#update",  :via => [:put]
   match 'routing/:id', :constraints => {:id => /[^\/]+/}, :to => "route#show",  :via => [:get]
 

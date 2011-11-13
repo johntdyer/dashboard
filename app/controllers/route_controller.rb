@@ -1,6 +1,4 @@
 class RouteController < ApplicationController
-  before_filter :authenticate_user!, :except=>[:index,:show]
-
   def update
     if params[:hostname]
       @browser = Browser.find_by_hostname(params[:hostname])
@@ -19,6 +17,12 @@ class RouteController < ApplicationController
       @browser.add :outbound
       Rails.logger.debug "#{@browser.hostname} added to outbound"
       render :json => {:browser=>@browser.hostname,:zone=>"outbound",:action=>"add"}
+    when 'phono'
+      @gateway = Phono.find_by_hostname(params[:host])
+      @gateway.add
+      Rails.logger.debug "#{@gateway.hostname} added"
+      render :json => {:browser=>@gateway.hostname,:zone=>"phono",:action=>"add"}
+
     else
       render :json => "error"
     end
@@ -43,29 +47,27 @@ class RouteController < ApplicationController
       @browser.remove :outbound
       Rails.logger.debug "#{@browser.hostname} removed from outbound"
       render :json => {:browser=>@browser.hostname,:zone=>"outbound",:action=>"remove"}
+    when 'phono'
+      @gateway = Phono.find_by_hostname(params[:host])
+      @gateway.remove
+      Rails.logger.debug "#{@gateway.hostname} removed"
+      render :json => {:browser=>@gateway.hostname,:zone=>"phono",:action=>"remove"}
+
     else
       render :json =>"error"
     end
   end
 
   def show
-    @browser = Browser.find_by_hostname(params[:id])
 
-    case params[:zone]
-    when 'romeo'
-      render :json => {:routing=>{:inbound=>in_romeo?}}
-    when 'outbound'
-      render :json => {:routing=>{:outbound=>in_outbound?}}
+    @browser = Browser.find_by_hostname(params[:id])
+    @gateway = Phono.find_by_hostname(params[:id])
+    if @browser
+      render :json => {:routing=>{:inbound=>in_romeo?,:outbound=>in_outbound?}}
+    elsif @gateway
+      render :json => {:routing=>{:inbound=>@gateway.in?}}
     else
-      render :json => @browser.status
+      render :text => {:routing=>"UnknownHost"}
     end
   end
 end
-
-
-
-# -d  '{"method":"user_find","params":[[""],{}],"id":0}' \
-#
-# #  curl -X DELETE "http://127.0.0.1:3000/routing/romeo/tropo203.orl.voxeo.net" -H "Content-Type: application/json"
-#curl -X DELETE "http://127.0.0.1:3000/routing/romeo/tropo185.las.voxeo.net" -H "Content-Type: application/json"
-#curl -X POST "http://127.0.0.1:3000/routing/romeo/tropo203.orl.voxeo.net" -H "Content-Type: application/json"
