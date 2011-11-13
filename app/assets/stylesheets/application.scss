@@ -4,7 +4,8 @@
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require_self
  *= require formtastic 
- *= require demo_table_jui.css
+ *= require demo_table_jui.css 
+ *= require jquery-ui-1.8.16.custom.css
  *= require_tree . 
 
 */
@@ -13,4 +14,16 @@
   border-radius: $radius;
   -moz-border-radius: $radius;
   -webkit-border-radius: $radius;
+}
+*[id*='phono_']{
+  width: 150px;
+  margin-right: auto;
+  display: table-cell;
+    margin-left: auto;  
+  vertical-align: middle;
+}
+div.jquery-ajax-loader {
+  background: #333 url(spinners/jquery.ajaxLoader.gif) no-repeat 50% 50%;
+  width: 145px;
+  opacity: .6;
 }

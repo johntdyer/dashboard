@@ -1,14 +1,22 @@
 <h1>Listing Phono Gateways</h1>
 <style type="text/css">
-  #browsers{
-  width: 50%;
+  #phonos{
+  width: 80%;
   }
-</style>
-<div id="browsers">
+  
+/*  .center{
+    margin:0px auto;
+    text-align:left;
+    padding:15px;
+  }     */
+</style> 
+
+<div id="phonos">
   <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
       <THEAD>
         <th>Hostname</th>
         <th>Description</th>
+        <th>Status</th>
         <th></th>
       </THEAD>
 
@@ -16,17 +24,23 @@
       <tr>     
         <td><%= phono.hostname %></td>
         <td><%= phono.description %></td>
-
-        <td><%= link_to raw("#{image_tag("icons/PNG-24/Info.png")}"), phono %>
-          <% if current_user.try(:admin?) %>
-            <%= link_to raw("#{image_tag("icons/PNG-24/Modify.png")}"), edit_phono_path(phono) %>
-            <!-- <%= link_to raw("#{image_tag("icons/PNG-24/Delete.png")}"), phono, confirm: 'Are you sure?', method: :delete %></td> -->
+         <td>
+            <%=build_switch(phono)%>
+         </td>
+        <td> 
+          <% if routing_admin? %>          
+            <%= link_to raw("#{image_tag("icons/PNG-24/Info.png")}"), phono %>
           <%end%>
+          <% if super_admin? %>
+            <%= link_to raw("#{image_tag("icons/PNG-24/Modify.png")}"), edit_phono_path(phono) %>
+            <%= link_to raw("#{image_tag("icons/PNG-24/Delete.png")}"), phono, confirm: 'Are you sure?', method: :delete %>
+          <%end%>
+        </td>
       </tr>
       <% end %>
     </table>
   <br />
   </div> 
-  <% if current_user.try(:admin?) %>
+  <% if super_admin? %>
     <%= link_to 'New Phono', new_phono_path %>
   <%end%>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111024015049) do
+ActiveRecord::Schema.define(:version => 20111110215428) do
 
   create_table "browsers", :force => true do |t|
     t.string   "hostname"
@@ -35,6 +35,15 @@ ActiveRecord::Schema.define(:version => 20111024015049) do
     t.string   "short_name"
     t.integer  "phono_id"
     t.integer  "node_ids"
+  end
+
+  create_table "journels", :force => true do |t|
+    t.integer  "account_id"
+    t.string   "account_name"
+    t.string   "action"
+    t.string   "ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "networks", :force => true do |t|

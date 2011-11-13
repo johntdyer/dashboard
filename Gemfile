@@ -19,7 +19,9 @@ end
 gem 'jquery-rails'
 gem 'awesome_print'
 gem 'formtastic'
-
+gem 'tropo-provisioning'
+gem 'rest-client'
+gem 'httparty'
 #gem "compass", ">= 0.11.5"
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -29,7 +31,7 @@ gem 'formtastic'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
-gem 'devise'
+#gem 'devise'
 
 #gem 'web-app-theme', '~> 0.8.0'
 
@@ -42,5 +44,5 @@ gem "friendly_id", "~> 4.0.0.beta14"
 
 
 group :development do
-#  gem "rails-erd"
+  #  gem "rails-erd"
 end

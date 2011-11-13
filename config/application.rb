@@ -2,6 +2,11 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
+ENV['PROV_API_BASE_URI'] = "https://api.tropo.com"
+ENV['PROV_API_UNAME'] = 'voxeo-labs'
+ENV['PROV_API_PASSWD'] = 'idontcare22'
+ENV['EVO_SSO_URI'] = "http://evolution-internal.voxeo.com"
+
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
   Bundler.require *Rails.groups(:assets => %w(development test))
