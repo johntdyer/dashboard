@@ -1,7 +1,6 @@
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 
 
-
 %w(
     cgi 
     yaml
@@ -14,27 +13,7 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
     awesome_print
   ).each { |lib| require lib }
 
-%w(
-    helpers/helpers
+%w( 
     helpers/config
-    helpers/status
-    helpers/phono_helpers
-  ).each {|lib| require lib }
-
-
-%w(
-    zones/romeo
-    zones/inbound
-    zones/outbound
-    zones/phono
     db/database
   ).each { |lib| require lib }
-
-  $config = LabsRouting::Config.new(File.open("#{LabsRouting::BASE_PATH}/config.yml") { |file| YAML.load(file) })
-
-# %w(
-#     models/browser
-#     models/partition
-#     models/gateway
-#     
-#   ).each { |lib| require lib }    
