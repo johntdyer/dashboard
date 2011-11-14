@@ -1,0 +1,24 @@
+<script type="text/javascript" charset="utf-8">
+  jQuery(document).ready(function() {
+    if(Boolean(<%=@browser_status[:routing][:inbound] %>)){
+      $('#active_romeo').attr('checked','checked');
+      $("label[for='inactive_romeo']").removeClass("selected");
+      $("label[for='active_romeo']").addClass("selected");
+    }else{
+      $('#inactive_romeo').attr('checked','checked');
+      $("label[for='active_romeo']").removeClass("selected");
+      $("label[for='inactive_romeo']").addClass("selected");
+    }
+    
+    if(Boolean(<%=@browser_status[:routing][:outbound] %>)){
+      $('#active_outbound').attr('checked','checked');
+      $("label[for='active_outbound']").addClass("selected");
+      $("label[for='inactive_outbound']").removeClass("selected");
+      
+    }else{
+      $('#inactive_outbound').attr('checked','checked');
+      $("label[for='active_outbound']").removeClass("selected");
+      $("label[for='inactive_outbound']").addClass("selected");
+    }
+  });
+</script>

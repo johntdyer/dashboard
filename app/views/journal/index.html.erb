@@ -1,0 +1,37 @@
+<h1>Routing Journal</h1>
+<style type="text/css">
+  #journal{
+  width: 80%;
+  }
+  
+/*  .center{
+    margin:0px auto;
+    text-align:left;
+    padding:15px;
+  }     */
+</style> 
+
+<div id="journal">
+  <table cellpadding="0" cellspacing="0" border="0" class="display" id="routing_log">
+      <THEAD>
+        <th>User</th>
+        <th>Asset</th>
+        <th>Action</th>
+        <th>Zone</th>
+        <th>IP Address</th>
+        <th>Date</th>
+      </THEAD>
+
+      <% @journals.each do |entry| %>
+      <tr>     
+        <td><%= entry.username %></td>
+        <td><%= entry.asset %></td>
+        <td><%= entry.action %></td> 
+        <td><%= entry.zone %></td>
+        <td><%= entry.ip %></td>
+        <td><%= entry.created_at.strftime('%m-%e-%y %H:%M')%> EST</td>
+      </tr>
+      <% end %>
+    </table>
+  <br />
+  </div> 
