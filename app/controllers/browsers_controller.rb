@@ -1,18 +1,13 @@
 class BrowsersController < ApplicationController
-
-  # GET /browsers
-  # GET /browsers.json
   def index
     @browsers = Browser.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.json { render json: @browsers }
     end
   end
 
-  # GET /browsers/1
-  # GET /browsers/1.json
   def show
     if params[:browser]
       @browser = Browser.where("hostname like ?","#{params[:browser]}%").limit(1).first
@@ -20,10 +15,7 @@ class BrowsersController < ApplicationController
       @browser = Browser.find(params[:id])
     end
 
-    #@is_admin = current_user.try(:admin?)
-    @outbound = LabsRouting::Outbound.new({:browser=>@browser.hostname,:tsig_key=>$config.dns.outbound.tsig_key})
-    @romeo  = LabsRouting::Romeo.new({:browser=>@browser.hostname,:tsig_key=>$config.dns.romeo.send(@browser.datacenter.short_name).tsig_key})
-
+    @browser_status = @browser.status
 
     respond_to do |format|
       format.html # show.html.erb
@@ -31,8 +23,6 @@ class BrowsersController < ApplicationController
     end
   end
 
-  # GET /browsers/new
-  # GET /browsers/new.json
   def new
     @browser = Browser.new
 
@@ -42,13 +32,10 @@ class BrowsersController < ApplicationController
     end
   end
 
-  # GET /browsers/1/edit
   def edit
     @browser = Browser.find(params[:id])
   end
 
-  # POST /browsers
-  # POST /browsers.json
   def create
     @browser = Browser.new(params[:browser])
 
@@ -63,8 +50,6 @@ class BrowsersController < ApplicationController
     end
   end
 
-  # PUT /browsers/1
-  # PUT /browsers/1.json
   def update
     @browser = Browser.find(params[:id])
 
@@ -79,8 +64,6 @@ class BrowsersController < ApplicationController
     end
   end
 
-  # DELETE /browsers/1
-  # DELETE /browsers/1.json
   def destroy
     @browser = Browser.find(params[:id])
     @browser.destroy
