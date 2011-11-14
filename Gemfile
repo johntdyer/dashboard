@@ -16,6 +16,8 @@ group :assets do
   gem 'uglifier'
 end
 
+gem 'newrelic_rpm'
+
 gem 'jquery-rails'
 gem 'awesome_print'
 gem 'formtastic'
