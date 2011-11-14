@@ -1,1 +1,0 @@
-require 'tropo_provisioning'
