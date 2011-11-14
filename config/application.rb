@@ -4,7 +4,7 @@ require 'rails/all'
 
 ENV['PROV_API_BASE_URI'] = "https://api.tropo.com"
 ENV['PROV_API_UNAME'] = 'voxeo-labs'
-ENV['PROV_API_PASSWD'] = 'idontcare22'
+ENV['PROV_API_PASSWD'] = '______'
 ENV['EVO_SSO_URI'] = "http://evolution-internal.voxeo.com"
 
 if defined?(Bundler)
