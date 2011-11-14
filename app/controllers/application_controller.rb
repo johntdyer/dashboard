@@ -17,16 +17,17 @@ class ApplicationController < ActionController::Base
   end
 
   def auth
-    authenticate_or_request_with_http_basic { |u, p|
-      @user = User.new(u,p).user_data
-      if @user
-        session[:current_user] ||= @user
-      else
-        log_event :action=>"Failed Auth",:asset=>"Authentication",:username=>u, :zone=>"-----"
-
-        request_http_basic_authentication
-      end
-    }
+    unless session[:current_user]
+      authenticate_or_request_with_http_basic { |u, p|
+        @user = User.new(u,p).user_data
+        if @user
+          session[:current_user] ||= @user
+        else
+          log_event :action=>"Failed Auth",:asset=>"Authentication",:username=>u, :zone=>"-----"
+          request_http_basic_authentication
+        end
+      }
+    end
   end
 
   def super_admin

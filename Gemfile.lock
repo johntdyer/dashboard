@@ -64,10 +64,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.16)
     multi_json (1.0.3)
-<<<<<<< HEAD
     newrelic_rpm (3.3.0)
-=======
->>>>>>> 8c00f9dca4b371177f9fe5ec2c70c7dc441973d4
     polyglot (0.3.2)
     rack (1.3.5)
     rack-cache (1.0.3)
@@ -136,10 +133,7 @@ DEPENDENCIES
   friendly_id (~> 4.0.0.beta14)
   httparty
   jquery-rails
-<<<<<<< HEAD
   newrelic_rpm
-=======
->>>>>>> 8c00f9dca4b371177f9fe5ec2c70c7dc441973d4
   rails (= 3.1.0)
   rest-client
   sass-rails (~> 3.1.0)
