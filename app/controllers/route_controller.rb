@@ -9,20 +9,19 @@ class RouteController < ApplicationController
     end
 
     case params[:zone].split("_")[0]
-    when 'romeo'
-      Rails.logger.debug "#{@browser.hostname} added to romeo"
-      @browser.add :inbound
-      render :json => {:browser=>@browser.hostname,:zone=>"inbound",:action=>"add"}
-    when 'outbound'
-      @browser.add :outbound
-      Rails.logger.debug "#{@browser.hostname} added to outbound"
-      render :json => {:browser=>@browser.hostname,:zone=>"outbound",:action=>"add"}
-    when 'phono'
-      @gateway = Phono.find_by_hostname(params[:host])
-      @gateway.add
-      Rails.logger.debug "#{@gateway.hostname} added"
-      render :json => {:browser=>@gateway.hostname,:zone=>"phono",:action=>"add"}
-
+      when 'romeo'
+        @browser.add :inbound
+        log_event :action=>"add",:asset=>@browser.hostname,:zone=>'inbound'
+        render :json => {:browser=>@browser.hostname,:zone=>"inbound",:action=>"add"}
+      when 'outbound'
+        @browser.add :outbound
+        log_event :action=>"add",:asset=>@browser.hostname,:zone=>'outbound'
+        render :json => {:browser=>@browser.hostname,:zone=>"outbound",:action=>"add"}
+      when 'phono'
+        @gateway = Phono.find_by_hostname(params[:host])
+        @gateway.add
+        log_event :action=>"add",:asset=>@browser.hostname,:zone=>'phono'
+        render :json => {:browser=>@gateway.hostname,:zone=>"phono",:action=>"add"}
     else
       render :json => "error"
     end
@@ -40,17 +39,18 @@ class RouteController < ApplicationController
 
     case params[:zone]
     when 'romeo'
-      Rails.logger.debug "#{@browser.hostname} removed from romeo"
       @browser.remove :inbound
+      log_event :action=>"remove",:asset=>@browser.hostname,:zone=>'inbound'
       render :json => {:browser=>@browser.hostname,:zone=>"inbound",:action=>"remove"}
     when 'outbound'
       @browser.remove :outbound
-      Rails.logger.debug "#{@browser.hostname} removed from outbound"
+      log_event :action=>"remove",:asset=>@browser.hostname,:zone=>'outbound'
       render :json => {:browser=>@browser.hostname,:zone=>"outbound",:action=>"remove"}
     when 'phono'
       @gateway = Phono.find_by_hostname(params[:host])
       @gateway.remove
-      Rails.logger.debug "#{@gateway.hostname} removed"
+      log_event :action=>"remove",:asset=>@browser.hostname,:zone=>'phono'
+
       render :json => {:browser=>@gateway.hostname,:zone=>"phono",:action=>"remove"}
 
     else
@@ -70,4 +70,5 @@ class RouteController < ApplicationController
       render :text => {:routing=>"UnknownHost"}
     end
   end
+
 end

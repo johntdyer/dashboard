@@ -7,6 +7,7 @@ Dashboard::Application.routes.draw do
   resources :browsers
   resources :partition_platforms
 
+  match "/journal", :via => [:get], :to=> "journal#index", :ad => [:logs,:journal,:log]
   match "/browsers/:browser", :constraints => {:browser => /[^\/]+/}, :to => "browsers#show"
 
   #match 'routing/:zone/:id', :constraints => {:id => /[^\/]+/}, :to => "route#update",  :via => [:put]
