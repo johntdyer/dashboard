@@ -16,10 +16,10 @@
             <td><%=get_button(browser.in_romeo?)%></td>
             <td><%=get_button(browser.in_outbound?)%></td>
             <td>
-            <% if routing_admin? %>
+            <% if is_admin? %>
             <%= link_to raw("#{image_tag("icons/PNG-24/Info.png")}"), browser %> 
             <%end%>
-          <% if super_admin? %>
+          <% if is_super_admin? %>
             <%= link_to raw("#{image_tag("icons/PNG-24/Modify.png")}"), edit_browser_path(browser) %>
             <%= link_to raw("#{image_tag("icons/PNG-24/Delete.png")}"), browser, confirm: 'Are you sure?', method: :delete %>
           <%end%>
@@ -29,7 +29,7 @@
     </table>
   <br />
   </div>
-  <% if super_admin? %>
+  <% if is_super_admin? %>
     <%= link_to 'New Browser', new_browser_path %>
   <%end%>
   

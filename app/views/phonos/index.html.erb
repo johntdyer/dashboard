@@ -3,12 +3,6 @@
   #phonos{
   width: 80%;
   }
-  
-/*  .center{
-    margin:0px auto;
-    text-align:left;
-    padding:15px;
-  }     */
 </style> 
 
 <div id="phonos">
@@ -28,10 +22,10 @@
             <%=build_switch(phono)%>
          </td>
         <td> 
-          <% if routing_admin? %>          
+          <% if is_admin? %>          
             <%= link_to raw("#{image_tag("icons/PNG-24/Info.png")}"), phono %>
           <%end%>
-          <% if super_admin? %>
+          <% if is_super_admin? %>
             <%= link_to raw("#{image_tag("icons/PNG-24/Modify.png")}"), edit_phono_path(phono) %>
             <%= link_to raw("#{image_tag("icons/PNG-24/Delete.png")}"), phono, confirm: 'Are you sure?', method: :delete %>
           <%end%>
@@ -40,7 +34,8 @@
       <% end %>
     </table>
   <br />
-  </div> 
-  <% if super_admin? %>
+  </div>
+
+  <% if is_super_admin? %>
     <%= link_to 'New Phono', new_phono_path %>
   <%end%>

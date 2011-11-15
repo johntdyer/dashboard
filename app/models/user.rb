@@ -12,8 +12,12 @@ class User
     end
   end
 
-  def is_admin
-    self.roles.include?('PLATFORM_OPS')
+  def is_admin?
+    @user_data[:roles].include?('PLATFORM_OPS') || @user_data[:roles].include?('NOC') || @user_data[:roles].include?('BIZBLOG_SUPER_ADMIN')
+  end
+
+  def is_super_admin?
+    @user_data[:roles].include?('BIZBLOG_SUPER_ADMIN')
   end
 
   private

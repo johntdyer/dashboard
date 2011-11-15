@@ -6,8 +6,6 @@
 <th>Description</th>
 <th>Datacenter</th>
 <th></th>
-<th></th>
-<th></th>
 </tr>
 
 <% @nodes.each do |node| %>
@@ -15,19 +13,18 @@
   <td><%= node.hostname.capitalize %></td>
   <td><%= node.description.capitalize %></td>
   <td><%= node.datacenter.name.capitalize %></td>
-
-
-  <td><%= link_to 'Show', node %></td>
-  <% if super_admin? %>
-  <td><%= link_to 'Edit', edit_node_path(node) %></td>
-  <td><%= link_to 'Destroy', node, confirm: 'Are you sure?', method: :delete %></td>
+  <% if is_admin? %>
+    <%= link_to raw("#{image_tag("icons/PNG-24/Info.png")}"), phono %>
+  <%end%>
+  <% if is_super_admin? %>
+    <%= link_to raw("#{image_tag("icons/PNG-24/Modify.png")}"), edit_phono_path(phono) %>
+    <%= link_to raw("#{image_tag("icons/PNG-24/Delete.png")}"), phono, confirm: 'Are you sure?', method: :delete %>
   <%end%>
   </tr>
   <% end %>
   </table>
 
   <br />
-  <% if super_admin? %>
-
-  <%= link_to 'New Node', new_node_path %>
+  <% if is_super_admin? %>
+    <%= link_to 'New Node', new_node_path %>
   <%end%>
