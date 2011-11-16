@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_filter :auth
-  before_filter :routing_admin, :only =>  [:new,:edit,:create,:destroy,:show]
+  before_filter :routing_admin?, :only =>  [:new,:edit,:create,:destroy,:show]
 
   protect_from_forgery
 
