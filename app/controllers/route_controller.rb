@@ -20,7 +20,7 @@ class RouteController < ApplicationController
       when 'phono'
         @gateway = Phono.find_by_hostname(params[:host])
         @gateway.add
-        log_event :action=>"add",:asset=>@browser.hostname,:zone=>'phono'
+        log_event :action=>"add",:asset=>@gateway.hostname,:zone=>'phono'
         render :json => {:browser=>@gateway.hostname,:zone=>"phono",:action=>"add"}
     else
       render :json => "error"
@@ -49,7 +49,7 @@ class RouteController < ApplicationController
     when 'phono'
       @gateway = Phono.find_by_hostname(params[:host])
       @gateway.remove
-      log_event :action=>"remove",:asset=>@browser.hostname,:zone=>'phono'
+      log_event :action=>"remove",:asset=>@gateway.hostname,:zone=>'phono'
 
       render :json => {:browser=>@gateway.hostname,:zone=>"phono",:action=>"remove"}
 
