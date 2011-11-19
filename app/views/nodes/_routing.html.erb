@@ -1,0 +1,28 @@
+<table id="routing" border="0" cellspacing="5" cellpadding="5">
+  <tr>
+    <th>Zone</th>
+    <th>Status</th>
+  </tr>
+  <tr>
+    <td>Romeo</td>
+      <td>
+        <p class="field switch" id="romeo_switch" data_type="romeo" data_active="<%=@node_status[:routing][:inbound]%>" data_hostname=<%=@node.hostname%>>
+          <input type="radio" id="active_romeo" name="field" />
+          <input type="radio" id="inactive_romeo" name="field"/>
+          <label for="active_romeo" class="cb-enable"><span>Active</span></label>
+          <label for="inactive_romeo" class="cb-disable"><span>Inactive</span></label>
+        </p>
+      <td>
+   </tr>
+   <tr>
+     <td>Outbound</td>
+      <td>
+        <p class="field switch" id="outbound_switch" data_type="outbound" data_active="<%=@node_status[:routing][:outbound]%>" data_hostname=<%=@node.hostname%>>
+          <input type="radio" id="active_outbound" name="field" />
+          <input type="radio" id="inactive_outbound" name="field"/>
+          <label for="active_outbound" class="cb-enable"><span>Active</span></label>
+          <label for="inactive_outbound" class="cb-disable"><span>Inactive</span></label>
+        </p>
+      </td>
+    </tr>
+</table>
