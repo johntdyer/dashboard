@@ -1,29 +1,30 @@
-<h1>Listing nodes</h1>
-
-<table>
-<tr>
-<th>Hostname</th>
-<th>Description</th>
-<th>Datacenter</th>
-<th></th>
-</tr>
-
-<% @nodes.each do |node| %>
-  <tr>
-  <td><%= node.hostname.capitalize %></td>
-  <td><%= node.description.capitalize %></td>
-  <td><%= node.datacenter.name.capitalize %></td>
-  <% if is_admin? %>
-    <%= link_to raw("#{image_tag("icons/PNG-24/Info.png")}"), phono %>
-  <%end%>
-  <% if is_super_admin? %>
-    <%= link_to raw("#{image_tag("icons/PNG-24/Modify.png")}"), edit_phono_path(phono) %>
-    <%= link_to raw("#{image_tag("icons/PNG-24/Delete.png")}"), phono, confirm: 'Are you sure?', method: :delete %>
-  <%end%>
-  </tr>
-  <% end %>
+<h1>Listing Nodes</h1>
+<div id="nodes">
+  <table cellpadding="0" cellspacing="0" border="0" class="display" id="nodes_table">
+    <THEAD>
+      <th>Hostname</th>
+      <th>Description</th>
+      <th>Datacenter</th>
+      <th></th>
+    </THEAD>
+    <% @nodes.each do |node| %>
+    <tr>
+      <td><%= node.hostname.downcase %></td>
+      <td><%= node.description.downcase %></td>
+      <td><%= node.datacenter.name.capitalize %></td>
+      <td>
+        <% if is_admin? %>
+          <%= link_to raw("#{image_tag("icons/PNG-24/Info.png")}"), node %>
+        <%end%>
+        <% if is_super_admin? %>
+          <%= link_to raw("#{image_tag("icons/PNG-24/Modify.png")}"), edit_node_path(node) %>
+          <%= link_to raw("#{image_tag("icons/PNG-24/Delete.png")}"), node, confirm: 'Are you sure?', method: :delete %>
+        <%end%>
+      </td>
+    </tr>
+    <% end %>
   </table>
-
+</div>
   <br />
   <% if is_super_admin? %>
     <%= link_to 'New Node', new_node_path %>

@@ -1,6 +1,8 @@
 <h1>Editing Partition</h1>
+<% if is_super_admin? %>
 
-<%= render 'form' %>
+  <%= render 'form' %>
 
-<%= link_to 'Show', @partition_platform %> |
-<%= link_to 'Back', partition_platforms_path %>
+  <%= link_to 'Show', @partition_platform %> |
+  <%= link_to 'Back', partition_platforms_path %>
+  <%=end%>

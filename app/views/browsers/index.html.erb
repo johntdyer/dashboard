@@ -1,33 +1,30 @@
-<h1>Listing browsers</h1>
-
+<h1>Listing Browsers</h1>
 <div id="browsers">
-  <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
-      <THEAD>
-        <th>Hostname</th>
-        <th>Romeo</th>
-        <th>Outbound</th>
-        <th></th>
-      </THEAD>
-
-      <% @browsers.each do |browser| %>
-      
+  <table cellpadding="0" cellspacing="0" border="0" class="display" id="browser_table">
+    <THEAD>
+      <th>Hostname</th>
+      <th>Romeo</th>
+      <th>Outbound</th>
+      <th></th>
+    </THEAD>
+    <% @browsers.each do |browser| %>
       <tr>
         <td><%= link_to_if routing_admin?, shorten_hostname(browser.hostname), "/browsers/#{browser.hostname}" %> </td>
-            <td><%=get_button(browser.in_romeo?)%></td>
-            <td><%=get_button(browser.in_outbound?)%></td>
-            <td>
-            <% if is_admin? %>
-            <%= link_to raw("#{image_tag("icons/PNG-24/Info.png")}"), browser %> 
-            <%end%>
-          <% if is_super_admin? %>
-            <%= link_to raw("#{image_tag("icons/PNG-24/Modify.png")}"), edit_browser_path(browser) %>
-            <%= link_to raw("#{image_tag("icons/PNG-24/Delete.png")}"), browser, confirm: 'Are you sure?', method: :delete %>
-          <%end%>
+        <td><%=get_button(browser.in_romeo?)%></td>
+        <td><%=get_button(browser.in_outbound?)%></td>
+        <td>
+        <% if is_admin? %>
+          <%= link_to raw("#{image_tag("icons/PNG-24/Info.png")}"), browser %> 
+        <%end%>
+        <% if is_super_admin? %>
+          <%= link_to raw("#{image_tag("icons/PNG-24/Modify.png")}"), edit_browser_path(browser) %>
+          <%= link_to raw("#{image_tag("icons/PNG-24/Delete.png")}"), browser, confirm: 'Are you sure?', method: :delete %>
+        <%end%>
         </td>
       </tr>
       <% end %>
     </table>
-  <br />
+  <br/>
   </div>
   <% if is_super_admin? %>
     <%= link_to 'New Browser', new_browser_path %>

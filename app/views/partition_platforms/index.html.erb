@@ -14,16 +14,18 @@
         <td><%= p.description %></td>
         <td><%= p.network.name %></td>
         
-        <td><%= link_to raw("#{image_tag("icons/PNG-24/Info.png")}"), "/ppid/#{p.ppid}" %>
-          <% if current_user.try(:admin?) %>
+        <td>
+          <% if is_super_admin? %>
+            <%= link_to raw("#{image_tag("icons/PNG-24/Info.png")}"), "/ppid/#{p.ppid}" %>
             <%= link_to raw("#{image_tag("icons/PNG-24/Modify.png")}"), edit_partition_platform_path(p) %>
             <%= link_to raw("#{image_tag("icons/PNG-24/Delete.png")}"), p, confirm: 'Are you sure?', method: :delete %></td>
           <%end%>
+        </td>
       </tr>
       <% end %>
     </table>
   <br />
   </div> 
-  <% if current_user.try(:admin?) %>
+  <% if is_super_admin? %>
     <%= link_to 'New Partition platform', new_partition_platform_path %>
   <%end%>

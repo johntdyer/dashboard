@@ -1,25 +1,29 @@
+<%= render :file => "/nodes/show.js.erb" %>
+
 <p id="notice"><%= notice %></p>
+<div id="hostname">
+  <label for="hostname">Browser:</label>
+  <%= @node.hostname %></td>
+</div>
+  <div id="ppid">
+    <table border="0" cellspacing="5" cellpadding="5">
+      <thead>
+        <th>PPID</th>
+        <th>Description</th>
+        <th>Network</th> 
+        <th></th>
+      </thead>
+      <% @node.partition_platforms.each do |e| %>
+      <tr>
+        <td><%= e.ppid %></td>
+        <td><%= e.description.capitalize %></td>
+        <td><%= e.network.name.capitalize %></td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
 
-<p>
-  <b>Hostname:</b>
-  <%= @node.hostname %>
-</p>
+    <%= render 'routing' %>
 
-<p>
-  <b>Description:</b>
-  <%= @node.description %>
-</p>
-
-<p>
-  <b>Slug:</b>
-  <%= @node.slug %>
-</p>
-
-<p>
-  <b>Datacenter:</b>
-  <%= @node.datacenter_id %>
-</p>
-
-
-<%= link_to 'Edit', edit_node_path(@node) %> |
-<%= link_to 'Back', nodes_path %>
+    <%= link_to 'Edit', edit_node_path(@node) %> |
+    <%= link_to 'Back', nodes_path %>

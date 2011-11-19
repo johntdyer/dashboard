@@ -20,7 +20,7 @@
      <th>Hostname</th>
      <th>Description</th>
      <th>Data Center</th>
-   </thead> 
+   </thead>                                                       
   <% @partition_platform.browsers.each do |b| %>
     <tr>
       <td><%=b.hostname.capitalize%></td>
@@ -31,7 +31,7 @@
 </table>
 </div>
 
-<% if true %>
+<% if is_super_admin? %>
   <%= link_to "Edit", edit_partition_platform_path(@partition_platform) %>
 <%end%>
   <%= link_to 'Back', partition_platforms_path %>

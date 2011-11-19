@@ -1,6 +1,5 @@
 class PartitionPlatformsController < ApplicationController
-  #before_filter :authenticate_user!, :except=>[:show,:index]
-  
+
   # GET /partition_platforms
   # GET /partition_platforms.json
   def index
@@ -16,10 +15,29 @@ class PartitionPlatformsController < ApplicationController
   # GET /partition_platforms/1.json
   def show
     @partition_platform = PartitionPlatform.find_by_ppid(params[:id])
+
     Rails.logger.debug { params[:id] }
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @partition_platform }
+      format.json {
+        render json: {
+          :ppid=>@partition_platform.ppid,
+          :description=>@partition_platform.description,
+          :network=>@partition_platform.network.name,
+          :datacenters=>@partition_platform.browsers.collect(&:datacenter).collect(&:name).uniq,
+          :browsers=>@partition_platform.browsers.collect(&:hostname)
+        }
+      }
+      format.xml{
+        render xml: {
+          :ppid=>@partition_platform.ppid,
+          :description=>@partition_platform.description,
+          :network=>@partition_platform.network.name,
+          :datacenters=>@partition_platform.browsers.collect(&:datacenter).collect(&:name).uniq,
+          :browsers=>@partition_platform.browsers.collect(&:hostname)
+#          (:only => [:id, :content])
+        }
+      }
     end
   end
 

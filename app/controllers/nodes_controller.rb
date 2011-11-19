@@ -14,7 +14,7 @@ class NodesController < ApplicationController
   # GET /nodes/1.json
   def show
     @node = Node.find(params[:id])
-
+    @node_status = @node.status
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @node }
