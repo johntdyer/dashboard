@@ -5,6 +5,8 @@
       <th>Hostname</th>
       <th>Description</th>
       <th>Datacenter</th>
+      <th>Inbound</th>
+      <th>Outbound</th>
       <th></th>
     </THEAD>
     <% @nodes.each do |node| %>
@@ -12,6 +14,8 @@
       <td><%= node.hostname.downcase %></td>
       <td><%= node.description.downcase %></td>
       <td><%= node.datacenter.name.capitalize %></td>
+      <td><%=get_button(node.in_romeo?)%></td>
+      <td><%=get_button(node.in_outbound?)%></td>
       <td>
         <% if is_admin? %>
           <%= link_to raw("#{image_tag("icons/PNG-24/Info.png")}"), node %>

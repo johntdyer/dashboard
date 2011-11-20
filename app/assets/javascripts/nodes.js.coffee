@@ -9,9 +9,11 @@ $(document).ready ->
     bPaginate: false
     bAutoWidth: false
     aoColumns: [
-      {"sWidth":"30%"},
-      {"sWidth":"30%"},
-      {"sWidth":"25%","sClass": 'center'},
-      {"sWidth":"10%"}
+      {"sWidth":"20%"},
+      {"sWidth":"20%"},
+      {"sWidth":"20%"},
+      {"sWidth":"12%"},
+      {"sWidth":"12%"},
+      {"sWidth":"16%","bSortable": false},
     ]
   )

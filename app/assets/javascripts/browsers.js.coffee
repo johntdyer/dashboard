@@ -8,7 +8,7 @@ $(document).ready ->
       {"sWidth":"30%"},
       {"sWidth":"30%"},
       {"sWidth":"25%","sClass": 'center'},
-      {"sWidth":"10%"}
+      {"sWidth":"10%","bSortable": false}
     ]
   )
     
