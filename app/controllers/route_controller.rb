@@ -63,7 +63,7 @@ class RouteController < ApplicationController
     @browser = Browser.find_by_hostname(params[:id])
     @gateway = Phono.find_by_hostname(params[:id])
     if @browser
-      render :json => {:routing=>{:inbound=>in_romeo?,:outbound=>in_outbound?}}
+      render :json => {:routing=>{:inbound=>@browser.in_romeo?,:outbound=>@browser.in_outbound?}}
     elsif @gateway
       render :json => {:routing=>{:inbound=>@gateway.in?}}
     else
