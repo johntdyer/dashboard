@@ -5,7 +5,7 @@ class PhonosController < ApplicationController
   # GET /phonos.json
   def index
     @phonos = Phono.all
-
+   @sites = Datacenter.all
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @phonos }

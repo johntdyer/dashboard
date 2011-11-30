@@ -1,41 +1,53 @@
 <h1>Listing Phono Gateways</h1>
 <style type="text/css">
-  #phonos{
+  #phonos,#sites{
   width: 80%;
   }
 </style> 
 
 <div id="phonos">
-  <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
-      <THEAD>
-        <th>Hostname</th>
-        <th>Description</th>
-        <th>Status</th>
-        <th></th>
-      </THEAD>
-
-      <% @phonos.each do |phono| %>
-      <tr>     
-        <td><%= phono.hostname %></td>
-        <td><%= phono.description %></td>
-         <td>
-            <%=build_switch(phono)%>
-         </td>
-        <td> 
-          <% if is_admin? %>          
-            <%= link_to raw("#{image_tag("icons/PNG-24/Info.png")}"), phono %>
-          <%end%>
-          <% if is_super_admin? %>
-            <%= link_to raw("#{image_tag("icons/PNG-24/Modify.png")}"), edit_phono_path(phono) %>
-            <%= link_to raw("#{image_tag("icons/PNG-24/Delete.png")}"), phono, confirm: 'Are you sure?', method: :delete %>
-          <%end%>
-        </td>
+  <table cellpadding="0" cellspacing="0" border="0" class="display" id="phonos_table">
+    <THEAD>
+      <th>Hostname</th>
+      <th>Description</th>
+      <th>Status</th>
+      <th></th>
+    </THEAD>
+    <% @phonos.each do |phono| %>
+    <tr>     
+      <td><%= phono.hostname %></td>
+      <td><%= phono.description %></td>
+      <td><%=build_switch(phono)%></td>
+      <td> 
+        <% if is_admin? %>          
+          <%= link_to raw("#{image_tag("icons/PNG-24/Info.png")}"), phono %>
+        <%end%>
+        <% if is_super_admin? %>
+          <%= link_to raw("#{image_tag("icons/PNG-24/Modify.png")}"), edit_phono_path(phono) %>
+          <%= link_to raw("#{image_tag("icons/PNG-24/Delete.png")}"), phono, confirm: 'Are you sure?', method: :delete %>
+        <%end%>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>
+<br/>  
+<div id="sites">
+  <table cellpadding="0" cellspacing="0" border="0" class="display" id="sites_table">
+    <THEAD>
+      <th>Name</th>
+      <th>Status</th>
+    </THEAD>
+    <% @sites.each do |site| %>
+      <tr>
+        <td><%= site.name.capitalize %></td>
+        <td><%= build_site_switch(site) %> <td>
       </tr>
-      <% end %>
-    </table>
-  <br />
-  </div>
-
-  <% if is_super_admin? %>
-    <%= link_to 'New Phono', new_phono_path %>
-  <%end%>
+    <% end %>
+  </table>
+</div>
+    
+<br />
+<% if is_super_admin? %>
+  <%= link_to 'New Phono', new_phono_path %>
+<%end%>

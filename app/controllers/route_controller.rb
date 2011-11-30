@@ -9,19 +9,19 @@ class RouteController < ApplicationController
     end
 
     case params[:zone].split("_")[0]
-      when 'romeo'
-        @browser.add :inbound
-        log_event :action=>"add",:asset=>@browser.hostname,:zone=>'inbound'
-        render :json => {:browser=>@browser.hostname,:zone=>"inbound",:action=>"add"}
-      when 'outbound'
-        @browser.add :outbound
-        log_event :action=>"add",:asset=>@browser.hostname,:zone=>'outbound'
-        render :json => {:browser=>@browser.hostname,:zone=>"outbound",:action=>"add"}
-      when 'phono'
-        @gateway = Phono.find_by_hostname(params[:host])
-        @gateway.add
-        log_event :action=>"add",:asset=>@gateway.hostname,:zone=>'phono'
-        render :json => {:browser=>@gateway.hostname,:zone=>"phono",:action=>"add"}
+    when 'romeo'
+      @browser.add :inbound
+      log_event :action=>"add",:asset=>@browser.hostname,:zone=>'inbound'
+      render :json => {:browser=>@browser.hostname,:zone=>"inbound",:action=>"add"}
+    when 'outbound'
+      @browser.add :outbound
+      log_event :action=>"add",:asset=>@browser.hostname,:zone=>'outbound'
+      render :json => {:browser=>@browser.hostname,:zone=>"outbound",:action=>"add"}
+    when 'phono'
+      @gateway = Phono.find_by_hostname(params[:host])
+      @gateway.add
+      log_event :action=>"add",:asset=>@gateway.hostname,:zone=>'phono'
+      render :json => {:browser=>@gateway.hostname,:zone=>"phono",:action=>"add"}
     else
       render :json => "error"
     end
@@ -52,6 +52,7 @@ class RouteController < ApplicationController
       log_event :action=>"remove",:asset=>@gateway.hostname,:zone=>'phono'
 
       render :json => {:browser=>@gateway.hostname,:zone=>"phono",:action=>"remove"}
+    when 'site'
 
     else
       render :json =>"error"
