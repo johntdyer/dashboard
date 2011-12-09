@@ -27,9 +27,9 @@ Browser.create([
    {:hostname=>"tropo185.atl.voxeo.net",:description=>"Production Tropo browser"},
    {:hostname=>"tropo186.atl.voxeo.net",:description=>"Production Tropo browser"},
    {:hostname=>"tropo185.las.voxeo.net",:description=>"Production Tropo browser"},
-   {:hostname=>"tropo186.las.voxeo.net",:description=>"Production Tropo browser"},
-   {:hostname=>"groupme142.orl.voxeo.net",:description=>"Dedicated GroupMe box"},
-   {:hostname=>"groupme143.orl.voxeo.net",:description=>"Dedicated GroupMe box"}
+   {:hostname=>"tropo186.las.voxeo.net",:description=>"Production Tropo browser"}
+  # ,{:hostname=>"groupme142.orl.voxeo.net",:description=>"Dedicated GroupMe box"},
+  # {:hostname=>"groupme143.orl.voxeo.net",:description=>"Dedicated GroupMe box"}
   ])
 
 Node.create([
@@ -80,34 +80,34 @@ PartitionPlatform.create({
 }).browsers << Browser.where("hostname like ?","tropo1%.atl.voxeo.net")
 
 PartitionPlatform.create({
-      :ppid=>653,
+      :ppid=>655,
       :description=>'Orlando Production Voice',
       :network=>Network.find_by_name("production")
 }).browsers << Browser.where("hostname like ?","tropo1%.orl.voxeo.net")
 
 PartitionPlatform.create({
-      :ppid=>654,
+      :ppid=>656,
       :description=>'Orlando Production Messaging',
       :network=>Network.find_by_name("production")
 }).browsers << Browser.where("hostname like ?","tropo1%.orl.voxeo.net")
 
 PartitionPlatform.create({
-      :ppid=>655,
+      :ppid=>653,
       :description=>'Vegas Production Voice',
       :network=>Network.find_by_name("production")
 }).browsers << Browser.where("hostname like ?","tropo1%.las.voxeo.net")
 
 PartitionPlatform.create({
-      :ppid=>656,
+      :ppid=>654,
       :description=>'Vegas Production Messaging',
       :network=>Network.find_by_name("production")
 }).browsers << Browser.where("hostname like ?","tropo1%.las.voxeo.net")
 
-PartitionPlatform.create({
-      :ppid=>627,
-      :description=>'GroupMe',
-      :network=>Network.find_by_name("production")
-}).browsers << Browser.where("hostname like ?","groupme1%.orl.voxeo.net")
+# PartitionPlatform.create({
+#       :ppid=>627,
+#       :description=>'GroupMe',
+#       :network=>Network.find_by_name("production")
+# }).browsers << Browser.where("hostname like ?","groupme1%.orl.voxeo.net")
 
 PartitionPlatform.create({
       :ppid=>663,
@@ -144,7 +144,7 @@ Phono.create([
 
 
 Datacenter.find_by_name("orlando").browsers << Browser.where("hostname like ?","tropo%.orl.voxeo.net")
-Datacenter.find_by_name("orlando").browsers << Browser.where("hostname like ?","group%.orl.voxeo.net")
+#Datacenter.find_by_name("orlando").browsers << Browser.where("hostname like ?","group%.orl.voxeo.net")
 Datacenter.find_by_name("atlanta").browsers << Browser.where("hostname like ?","tropo%.atl.voxeo.net")
 Datacenter.find_by_name("vegas").browsers << Browser.where("hostname like ?","tropo%.las.voxeo.net")
 
